@@ -28,13 +28,17 @@ function Board({ xIsNext, squares, onPlay }) {
   let status;
   if (winner) {
     status = 'Winner: ' + winner;
+  } else if (squares.every(square => square !== null)) {
+    status = 'Draw!';
   } else {
     status = 'Next player: ' + (xIsNext ? 'X' : 'O');
   }
 
   return (
     <>
-      <div className="status">{status}</div>
+      <div className={`status ${!winner && squares.every(square => square !== null) ? 'draw' : ''}`}>
+        {status}
+      </div>
       <div className="board-row">
         <Square 
           value={squares[0]} 
